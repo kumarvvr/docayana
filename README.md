@@ -17,6 +17,16 @@ fastapi dev main.py
 
 Then open http://127.0.0.1:8000/healthz or the interactive docs at http://127.0.0.1:8000/docs.
 
+## Tests
+
+```powershell
+pip install -e ".[dev]"     # app + pytest, pytest-cov, ruff
+pytest                      # run all tests
+pytest --cov=.              # with a coverage report
+```
+
+New functionality must come with unit tests in `tests/unit/`.
+
 ## Project docs
 
 - [docs/scope.md](docs/scope.md): product scope, v1 features and DynamoDB access patterns

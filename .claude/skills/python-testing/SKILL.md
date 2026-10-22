@@ -6,6 +6,7 @@ description: pytest conventions for this project (test layout, fakes vs mocks, F
 # Python Testing
 
 ## Layout
+Today: `tests/unit/` (with `tests/unit/tools/` for the scripts in `tools/`) and `tests/conftest.py`. Add the folders below as the app grows.
 ```
 tests/
   unit/          # domain + application, in-memory fakes, no I/O, fast
@@ -22,4 +23,4 @@ tests/
 - API tests: `app.dependency_overrides[get_doc_service] = lambda: fake_service`; assert status code and body schema.
 - DynamoDB tests: `with mock_aws():` create the table from the shared definition; set fake AWS creds via env in a fixture.
 - No real network or AWS calls; no `sleep`; freeze time when asserting timestamps.
-- Run: `pytest -q`; coverage with `pytest --cov=docayana --cov-report=term-missing`. New code ships with tests.
+- Run: `pytest -q`; coverage with `pytest --cov=docayana --cov-report=term-missing`. **New functionality must ship with unit tests in the same commit**; a change without tests is not done.

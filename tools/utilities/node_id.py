@@ -16,14 +16,18 @@ MAX_LENGTH = 64
 
 def new_node_id(length: int = DEFAULT_LENGTH) -> str:
     if not MIN_LENGTH <= length <= MAX_LENGTH:
-        raise ValueError(f"length must be between {MIN_LENGTH} and {MAX_LENGTH}, got {length}")
+        raise ValueError(
+            f"length must be between {MIN_LENGTH} and {MAX_LENGTH}, got {length}"
+        )
     # token_hex(n) returns 2n hex characters, so round up and trim for odd lengths.
     return secrets.token_hex((length + 1) // 2)[:length]
 
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Print random git-style hex node ids.")
-    parser.add_argument("-n", "--count", type=int, default=1, help="how many ids to print (default 1)")
+    parser.add_argument(
+        "-n", "--count", type=int, default=1, help="how many ids to print (default 1)"
+    )
     parser.add_argument(
         "--length",
         type=int,
@@ -39,7 +43,8 @@ def main() -> None:
         ids = [new_node_id(args.length) for _ in range(args.count)]
     except ValueError as err:
         raise SystemExit(f"error: {err}") from err
-    print("\n".join(ids))
+    if ids:
+        print("\n".join(ids))
 
 
 if __name__ == "__main__":

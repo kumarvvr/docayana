@@ -62,8 +62,15 @@ Config comes from system env vars prefixed `DOCAYANA_` (a `.env` file in the rep
 - Read config only through the injected `Settings`; never `os.environ` elsewhere.
 - No `boto3`/`ClientError`/`Decimal` above `infrastructure/`; no `HTTPException` in use cases.
 - Never `scan` DynamoDB in request paths; always paginate.
-- New code ships with tests; no real AWS or network calls in tests.
+- **New functionality must ship with unit tests** in `tests/unit/`, in the same commit: every new function, endpoint, tool or bug fix. A change without tests is not done. No real cloud or network calls in tests.
 - Add packages to `pyproject.toml`, not ad hoc `pip install`. Never commit `env/` or `.env`.
+
+## Testing
+- Framework: pytest (config in `pyproject.toml`), with pytest-cov for coverage and FastAPI's `TestClient` for endpoints.
+- Layout: `tests/unit/` mirrors the code (`tests/unit/tools/` for `tools/`); shared fixtures in `tests/conftest.py`, which also scrubs `DOCAYANA_*` and Google credential env vars so tests never reach real services.
+- `tools/infra` and `tools/utilities` are on pytest's `pythonpath`, so tests import those scripts by module name (`import node_id`).
+- Fake external clients (Firestore, Firebase) with small hand-written classes or `monkeypatch`; never call real services.
+- Run before every commit: `pytest` (or `pytest --cov=. ` for coverage). All tests must pass.
 
 ## Skills (`.claude/skills/`)
 Load the matching skill before working in that area; they hold the detail, this file does not repeat it.
