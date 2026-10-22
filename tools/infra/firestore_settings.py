@@ -14,4 +14,5 @@ COLLECTIONS = (
     "workspaces",
     "nodes",
     "catalog",
+    
 )
