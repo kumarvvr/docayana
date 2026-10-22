@@ -1,7 +1,7 @@
 """Create the collections listed in firestore_settings.py if they are missing.
 
 A collection that already holds any document is left untouched.
-Run from the repo root: .\\env\\Scripts\\python.exe tools\\infra\\setup_firestore.py
+Run from the repo root: .\\env\\Scripts\\python.exe tools\\infra\\firestore_setup.py
 """
 
 import os
@@ -26,7 +26,7 @@ def ensure_collection(db: Client, name: str) -> str:
     try:
         # create() fails instead of overwriting, so a concurrent writer is never clobbered.
         collection.document(settings.MARKER_DOC_ID).create(
-            {"created_by": "setup_firestore", "created_at": firestore.SERVER_TIMESTAMP}
+            {"created_by": "firestore_setup","created_at": firestore.SERVER_TIMESTAMP}
         )
     except AlreadyExists:
         return "exists, left unchanged"

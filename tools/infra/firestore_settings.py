@@ -1,4 +1,4 @@
-"""Inputs for setup_firestore.py. Every value is a plain string."""
+"""Inputs for firestore_setup.py. Every value is a plain string."""
 
 # Name of the env var holding the path to the service-account key file.
 CREDS_ENV_VAR = "DOCAYANA_GCP_CREDS"
