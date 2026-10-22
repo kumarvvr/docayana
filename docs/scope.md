@@ -1,6 +1,6 @@
 # Docayana Project Scope
 
-Status: draft, 2026-10-11. Owner: Kumar. Accepted ADRs in `docs/adr/` (0001 to 0007) confirm the **Assumption** lines and open questions 1 to 7; where an ADR and this file differ, the ADR wins. Discussion copy: [Claude Doc](https://claude.ai/code/artifact/7033e6b9-78e9-43e3-8fdc-ebe4b308b02e). This file is the canonical copy for the codebase; update it whenever the scope changes.
+Status: draft, 2026-10-11. Owner: Kumar. Lines marked **Assumption** and the Open questions table are proposed defaults, not decisions. The ADRs were cleared on 2026-10-22 and will be rebuilt after the research thread; once they exist, an ADR in `docs/adr/` wins over this file. Discussion copy: [Claude Doc](https://claude.ai/code/artifact/7033e6b9-78e9-43e3-8fdc-ebe4b308b02e). This file is the canonical copy for the codebase; update it whenever the scope changes.
 
 ## Purpose
 
@@ -75,7 +75,7 @@ These are deferred, not rejected; each would get its own ADR when picked up.
 
 ## Access patterns
 
-Recommended: an adjacency list. Each node is its own item keyed by id, and each parent holds one small "child edge" item per child, sorted by sibling position. Every v1 operation is then a `get_item`, a `query` or a small transaction, with no `scan`. ADR-0002 will finalize the keys. `w` = workspace id, `n` = node id, `p` = parent id, `u` = user id.
+Recommended: an adjacency list. Each node is its own item keyed by id, and each parent holds one small "child edge" item per child, sorted by sibling position. Every v1 operation is then a `get_item`, a `query` or a small transaction, with no `scan`. An ADR will finalize the keys. `w` = workspace id, `n` = node id, `p` = parent id, `u` = user id.
 
 | # | Access pattern | Operation | Proposed keys |
 | --- | --- | --- | --- |
@@ -127,7 +127,7 @@ These are already fixed by the skeleton in the repo and by CLAUDE.md; the scope 
 
 ## Open questions
 
-Questions 1 to 7 were settled on 2026-10-17 with the recommended defaults below (ADRs 0001 to 0004). Questions 8 and 9 are still open.
+All questions are open again until the ADRs are rebuilt after the research thread.
 
 | # | Question | Recommended default | What it changes |
 | --- | --- | --- | --- |
@@ -143,10 +143,6 @@ Questions 1 to 7 were settled on 2026-10-17 with the recommended defaults below 
 
 ## Next steps
 
-Decisions are recorded in `docs/adr/` (index in `docs/adr/README.md`). ADRs 0001 to 0007 are accepted.
-
-- [ ] ADR-0008: Deployment target and infrastructure as code (open questions 8 and 9)
-- [ ] ADR-0009: Observability: logs, traces, error reporting
-- [ ] Add `GSI1` to the table definition, and PyYAML and PyJWT to `pyproject.toml`
+- [ ] Finish the research thread
+- [ ] Rebuild the ADRs in `docs/adr/` from its findings
 - [ ] Rename the `Document` examples in the skills to `Node`
-- [ ] Initialize the git repository so ADRs and code have history

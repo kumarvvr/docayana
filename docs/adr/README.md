@@ -22,12 +22,5 @@ What gets easier, what gets harder, what we must now do.
 
 | # | Title | Status |
 | --- | --- | --- |
-| [0001](0001-product-scope-and-workspace-tenancy.md) | Product scope and workspace tenancy | accepted |
-| [0002](0002-tree-storage-in-dynamodb.md) | Tree storage in DynamoDB | accepted |
-| [0003](0003-node-types-properties-and-catalog.md) | Node types, property definitions and the catalog file | accepted |
-| [0004](0004-authentication-and-authorization.md) | Authentication and authorization | accepted |
-| [0005](0005-rest-api-surface.md) | REST API surface for nodes | accepted |
-| [0006](0006-aws-configuration-and-credentials.md) | AWS configuration and credentials | accepted |
-| [0007](0007-subtree-deletion.md) | Subtree deletion | accepted |
 
-Not yet written: deployment target and infrastructure as code (scope open questions 8 and 9), and observability.
+No ADRs yet. They will be rebuilt from scratch once the research thread is complete.
