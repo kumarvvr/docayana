@@ -4,6 +4,12 @@ Guidance for Claude Code working in this repository.
 
 > Items marked **(inferred)** were not found in the repo and are best guesses. Correct or delete them.
 
+## Git workflow
+- Commit every code change; don't leave work uncommitted.
+- Commit messages are full and descriptive: an imperative subject line under ~72 chars, a blank line, then a body explaining what changed and why.
+- Keep the local repo in sync with github.com/kumarvvr/docayana by pushing `main` after each commit; never fetch or pull.
+- Never commit secrets: key files, `.env`, or output that dumps `os.environ`.
+
 ## Project overview
 Docayana is a high-performance REST API for trees of nodes of arbitrary width and depth. Each node has a type that supplies configurable default properties, users can add custom properties, a pre-defined catalog of node types and properties ships as a local settings file, data lives in DynamoDB, and every request is authenticated.
 Status: architected skeleton only, no business features yet. Layers, app factory, settings, problem+json error handling, request IDs, `/healthz` + `/readyz`, DynamoDB table adapter and tests exist. No git repo yet.
