@@ -4,7 +4,7 @@ Status: draft, 2026-10-11. Owner: Kumar. Lines marked **Assumption** and the Ope
 
 ## Purpose
 
-Docayana is a high-performance REST API for managing trees of nodes of arbitrary width and depth, where every node carries typed properties, stored in DynamoDB and protected by user authentication.
+Docayana is a high-performance REST API for managing trees of nodes of arbitrary width and depth, where every node carries typed properties, stored in Cloud Firestore and protected by user authentication.
 
 - Each node has a **type**. The type supplies a set of default properties whose definitions are configurable and can change over time ("fluid").
 - Users can add **custom properties** to any node beyond its type's defaults.
@@ -75,6 +75,8 @@ These are deferred, not rejected; each would get its own ADR when picked up.
 
 ## Access patterns
 
+> **Note (2026-10-22):** app data now lives in Cloud Firestore. This table, and the DynamoDB mentions in Core concepts and the non-functional requirements, are still DynamoDB-shaped and will be redone for Firestore.
+
 Recommended: an adjacency list. Each node is its own item keyed by id, and each parent holds one small "child edge" item per child, sorted by sibling position. Every v1 operation is then a `get_item`, a `query` or a small transaction, with no `scan`. An ADR will finalize the keys. `w` = workspace id, `n` = node id, `p` = parent id, `u` = user id.
 
 | # | Access pattern | Operation | Proposed keys |
@@ -119,7 +121,7 @@ These are already fixed by the skeleton in the repo and by CLAUDE.md; the scope 
 | --- | --- |
 | Python 3.15, FastAPI, Pydantic v2 | `pyproject.toml` |
 | Clean architecture: domain, application, infrastructure, api; dependencies point inward | `clean-architecture` skill |
-| DynamoDB single-table design with generic `PK`/`SK` keys | `dynamodb-coding` skill, `infrastructure/dynamodb/table.py` |
+| Cloud Firestore via firebase-admin; the client is opened only in `docayana/firestore.py` | `docayana/firestore.py`, `docayana/app.py` |
 | REST under `/v1`, problem+json errors, cursor pagination, `ETag`/`If-Match`, `Idempotency-Key` | `rest-api-design` skill |
 | Request ids on every request; `/healthz` and `/readyz` probes | `api/request_id.py`, `api/routers/health.py` |
 | OpenTelemetry tracing, off by default | `infrastructure/telemetry.py` |
