@@ -1,8 +1,6 @@
-from fastapi import FastAPI
+"""Entry point: `fastapi dev main.py` or `uvicorn main:app`."""
 
-app = FastAPI(title="docayana")
+from docayana.app import create_app
+from docayana.settings import Settings
 
-
-@app.get("/healthz")
-def healthz() -> dict[str, str]:
-    return {"status": "ok"}
+app = create_app(Settings())
