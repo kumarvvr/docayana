@@ -8,3 +8,6 @@ __pycache__/
 .coverage
 htmlcov/
 dist/
+
+# Firebase / Firestore service-account keys: secrets, never commit
+*-firebase-adminsdk-*.json
